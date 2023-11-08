@@ -1,113 +1,42 @@
-import React, { useEffect, useState } from "react";
-import Pagination from "../components/Pagination";
-import AnimatedText from "../components/TextMorph";
-
-const bloglistData = {
-    bloglist: [
-        {
-            id: 1,
-            img: "https://picsum.photos/300/300",
-            title: "Blog Post 1",
-            desc: "This is the description of blog post 1.",
-            link: "https://example.com/blog/post1",
-        },
-        {
-            id: 2,
-            img: "https://picsum.photos/300/300",
-            title: "Blog Post 2",
-            desc: "This is the description of blog post 2.",
-            link: "https://example.com/blog/post2",
-        },
-        {
-            id: 3,
-            img: "https://picsum.photos/300/300",
-            title: "Blog Post 3",
-            desc: "This is the description of blog post 3.",
-            link: "https://example.com/blog/post3",
-        },
-        {
-            id: 4,
-            img: "https://picsum.photos/300/300",
-            title: "Blog Post 4",
-            desc: "This is the description of blog post 4.",
-            link: "https://example.com/blog/post4",
-        },
-        {
-            id: 5,
-            img: "https://picsum.photos/300/300",
-            title: "Blog Post 5",
-            desc: "This is the description of blog post 5.",
-            link: "https://example.com/blog/post5",
-        },
-        {
-            id: 6,
-            img: "https://picsum.photos/300/300",
-            title: "Blog Post 5",
-            desc: "This is the description of blog post 5.",
-            link: "https://example.com/blog/post5",
-        },
-        {
-            id: 7,
-            img: "https://picsum.photos/300/300",
-            title: "Blog Post 5",
-            desc: "This is the description of blog post 5.",
-            link: "https://example.com/blog/post5",
-        },
-        {
-            id: 8,
-            img: "https://picsum.photos/300/300",
-            title: "Blog Post 5",
-            desc: "This is the description of blog post 5.",
-            link: "https://example.com/blog/post5",
-        },
-        {
-            id: 9,
-            img: "https://picsum.photos/300/300",
-            title: "Blog Post 5",
-            desc: "This is the description of blog post 5.",
-            link: "https://example.com/blog/post5",
-        },
-        {
-            id: 10,
-            img: "https://picsum.photos/300/300",
-            title: "Blog Post 5",
-            desc: "This is the description of blog post 5.",
-            link: "https://example.com/blog/post5",
-        },
-        {
-            id: 11,
-            img: "https://picsum.photos/300/300",
-            title: "Blog Post 5",
-            desc: "This is the description of blog post 5.",
-            link: "https://example.com/blog/post5",
-        },
-    ],
-};
+import useApiData from "../components/useApiData";
 
 const Home = () => {
-    const [bloglist, setBloglist] = useState([]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setBloglist(bloglistData.bloglist);
-            } catch (error) {
-                console.log("Error fetching blog data:", error);
-            }
-        };
-
-        fetchData();
-    }, []);
+    const url = "https://fakestoreapi.com/products";
+    const { data, isLoading, isError } = useApiData(url);
 
     return (
-        <div className="flex flex-col relative overflow-hidden lg:flex-row lg:gap-5 bg-dotgrid text-white h-screen p-6 justify-center items-center">
-            {/* <h1>Blog List</h1> */}
-            <div className="w-[25rem] bg-purple-600/50 bottt blur-[150px] fixed -top-1/4 centerh h-[25rem]">
-                <br />
+        <div className="">
+            {isLoading && <p>Loading...</p>}
+            {isError && <p>Error</p>}
+            <div className="grid grid-cols-3 font-sans p-8 gap-8 w-full">
+                {data?.map((item) => (
+                    <div
+                        className=" text-center text-white border-2 border-white/10 hover:border-white  anim rounded-xl drop-shadow-lg p-4"
+                        key={item.id}
+                    >
+                        <img
+                            className="w-[10rem] rounded-lg mx-auto"
+                            src={item.image}
+                            alt={item.title}
+                        />
+                        <p className="text-xl mt-4 text-blue-100 font-semibold">
+                            {item.title.slice(0, 100)}
+                        </p>
+                        <p className="">{item.price}</p>
+                        <p className="opacity-70 text-sm">
+                            {item.description.slice(0, 200)}
+                            <span className="text-blue-300">... Read more</span>
+                        </p>
+                        <p className="text-sm w-fit mx-auto mt-4 bg-yellow-200 text-amber-800 p-2 py-1 rounded-full">
+                            {item.category}
+                        </p>
+                        <div className="text-sm justify-center mt-3 flex gap-2">
+                            <p>{item.rating.count}</p>
+                            <p className="">{item.rating.rate}</p>
+                        </div>
+                    </div>
+                ))}
             </div>
-            <AnimatedText text={"Devignx"} />
-            <AnimatedText text={"Studio"} />
-            {/* <Pagination blogsPerPage={4} blogs={bloglist} /> */}
         </div>
     );
 };

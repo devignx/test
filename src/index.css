@@ -36,7 +36,7 @@ body {
     font-family: "Mona Sans", sans-serif;
     overflow-x: hidden;
     transition: font-weight 0.2s ease-in-out;
-    background-color: #000;
+    background-color: #080608;
 }
 .bg-dotgrid {
     background: radial-gradient(rgb(228, 28, 255, 0.25) 10%, transparent 5%) 8px

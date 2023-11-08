@@ -1,18 +1,17 @@
 import Home from "./pages/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
-import Test from "./pages/Test";
-import Framer from "./pages/Framer";
-
+import { QueryClient, QueryClientProvider } from "react-query";
 function App() {
+    const queryClient = new QueryClient();
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route element={<Home />} path="/" />
-                <Route element={<Test />} path="/test" />
-                <Route element={<Framer />} path="/framer" />
-            </Routes>
-        </BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+            <BrowserRouter>
+                <Routes>
+                    <Route element={<Home />} path="/" />
+                </Routes>
+            </BrowserRouter>
+        </QueryClientProvider>
     );
 }
 
