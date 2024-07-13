@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer components {
+    .anim {
+        @apply transition-all duration-300 ease-in-out;
+    }
+}
+:root {
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --foreground-rgb: 255, 255, 255;
+        --background-start-rgb: 0, 0, 0;
+        --background-end-rgb: 0, 0, 0;
+    }
+}
+
+body {
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(
+            to bottom,
+            transparent,
+            rgb(var(--background-end-rgb))
+        )
+        rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}
+
+input,
+button:focus {
+    outline: 1px #ffffff;
+}
+
+div * {
+    scrollbar-width: 1px; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: none !important;
+        background-color: transparent;
+    }
+    ::-webkit-scrollbar {
+        width: 3px !important;
+        background-color: transparent;
+        position: absolute;
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: #ffffff50;
+        border-radius: 10px;
+        position: absolute;
+    }
+}
+
+.reveal-me {
+    clip-path: inset(0 0 100% 0);
+    opacity: 1;
+    animation: reveal 1s forwards cubic-bezier(0.44, -0.01, 0, 0.99);
+}
+
+.no-reveal {
+    clip-path: inset(0 0 0 0);
+    opacity: 0;
+    animation: hide 1s forwards cubic-bezier(0.44, -0.01, 0, 0.99);
+}
+
+@keyframes reveal {
+    0% {
+        clip-path: inset(0 0 100% 0);
+        opacity: 0;
+    }
+    100% {
+        clip-path: inset(0 0 0 0);
+        opacity: 1;
+    }
+}
+
+@keyframes hide {
+    0% {
+        clip-path: inset(0 0 0 0);
+        opacity: 1;
+    }
+    100% {
+        clip-path: inset(0 0 100% 0);
+        opacity: 0;
+    }
+}
