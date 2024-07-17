@@ -35,6 +35,58 @@ body {
         text-wrap: balance;
     }
 }
+@layer utilities {
+    .bottom-right {
+        mask: right 0 bottom calc(var(--s) + var(--r)) var(--_m),
+            right calc(var(--s) + var(--r)) bottom 0 var(--_m),
+            radial-gradient(var(--s) at 100% 100%, #0000 99%, #000 101%)
+                calc(-1 * var(--r)) calc(-1 * var(--r)) no-repeat,
+            conic-gradient(
+                from 90deg at calc(100% - var(--s) - 2 * var(--r))
+                    calc(100% - var(--s) - 2 * var(--r)),
+                #0000 25%,
+                #000 0
+            );
+    }
+
+    .bottom-left {
+        mask: calc(var(--s) + var(--r)) bottom var(--_m),
+            bottom calc(var(--s) + var(--r)) left 0 var(--_m),
+            radial-gradient(var(--s) at 0 100%, #0000 99%, #000 101%) var(--r)
+                calc(-1 * var(--r)) no-repeat,
+            conic-gradient(
+                from 180deg at calc(var(--s) + 2 * var(--r))
+                    calc(100% - var(--s) - 2 * var(--r)),
+                #0000 25%,
+                #000 0
+            );
+    }
+
+    .top-right {
+        mask: right calc(var(--s) + var(--r)) top 0 var(--_m),
+            right calc(var(--s) + var(--r)) var(--_m),
+            radial-gradient(var(--s) at 100% 0, #0000 99%, #000 101%)
+                calc(-1 * var(--r)) var(--r) no-repeat,
+            conic-gradient(
+                at calc(100% - var(--s) - 2 * var(--r))
+                    calc(var(--s) + 2 * var(--r)),
+                #0000 25%,
+                #000 0
+            );
+    }
+
+    .top-left {
+        mask: calc(var(--s) + var(--r)) 0 var(--_m),
+            0 calc(var(--s) + var(--r)) var(--_m),
+            radial-gradient(var(--s) at 0 0, #0000 99%, #000 101%) var(--r)
+                var(--r) no-repeat,
+            conic-gradient(
+                at calc(var(--s) + 2 * var(--r)) calc(var(--s) + 2 * var(--r)),
+                #000 75%,
+                #0000 0
+            );
+    }
+}
 
 input,
 button:focus {
@@ -62,34 +114,28 @@ div * {
 
 .reveal-me {
     clip-path: inset(0 0 100% 0);
-    opacity: 1;
     animation: reveal 1s forwards cubic-bezier(0.44, -0.01, 0, 0.99);
 }
 
 .no-reveal {
     clip-path: inset(0 0 0 0);
-    opacity: 0;
     animation: hide 1s forwards cubic-bezier(0.44, -0.01, 0, 0.99);
 }
 
 @keyframes reveal {
     0% {
         clip-path: inset(0 0 100% 0);
-        opacity: 0;
     }
     100% {
         clip-path: inset(0 0 0 0);
-        opacity: 1;
     }
 }
 
 @keyframes hide {
     0% {
         clip-path: inset(0 0 0 0);
-        opacity: 1;
     }
     100% {
         clip-path: inset(0 0 100% 0);
-        opacity: 0;
     }
 }

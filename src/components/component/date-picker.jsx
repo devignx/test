@@ -173,7 +173,7 @@ export default function Calendar() {
                     <div className="flex items-center gap-4">
                         <div
                             onClick={() => setMonthOpen(!monthOpen)}
-                            className="relative w-32"
+                            className="relative w-36"
                         >
                             <input
                                 type="text"
